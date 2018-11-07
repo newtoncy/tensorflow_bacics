@@ -6,24 +6,27 @@ def connect_len(chess_board, i, j):
     :param j:
     :return: 连成一条线的棋子长度
     """
+    if chess_board[i][j] == 0:
+        return 0
     forward = [[1, 0], [0, 1], [1, 1], [1, -1]]
     result = []
     for f in range(4):
         l = 0
         r = 0
         a, b = i, j
-        while i + forward[f][1] < 3 and j + forward[f][2] < 3 \
-                and chess_board[i][j] == chess_board[i + forward[f][1]][j + forward[f][2]]:
+        while 0 <= a + forward[f][0] < 3 and 0 <= b + forward[f][1] < 3 \
+                and chess_board[a][b] == chess_board[a + forward[f][0]][b + forward[f][1]]:
             l += 1
-            a += forward[f][1]
-            b += forward[f][2]
+            a += forward[f][0]
+            b += forward[f][1]
 
         a, b = i, j
-        while i - forward[f][1] > 0 and j - forward[f][2] > 0 \
-                and chess_board[i][j] == chess_board[i - forward[f][1]][j - forward[f][2]]:
+        while 3 > a - forward[f][0] >= 0 and 3 > b - forward[f][1] >= 0 \
+                and chess_board[a][b] == chess_board[a - forward[f][0]][b - forward[f][1]]:
             r += 1
-            a -= forward[f][1]
-            b -= forward[f][2]
+            a -= forward[f][0]
+            b -= forward[f][1]
+
         result.append(l + r + 1)
     return max(result)
 
@@ -46,3 +49,11 @@ def evaluation(chess_board):
                 return 0, True
     # 否则返回0,退出
     return 0, False
+
+# a = [
+#     [1, 0, 1],
+#     [1, 1, 0],
+#     [0, 0, 1]
+# ]
+# connect_len(a, 1, 1)
+# pass
