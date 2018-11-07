@@ -15,7 +15,9 @@ y_input = tf.placeholder(dtype=tf.float32)
 y = a * x_input ** 2 + b * x_input + c
 loss = tf.reduce_mean(tf.square(y - y_input))
 # step3：定义梯度降落操作
-train = tf.train.GradientDescentOptimizer(0.2).minimize(loss)
+gd = tf.train.GradientDescentOptimizer(0.2)
+gd_compute_op = gd.compute_gradients(loss)
+gd_apply_op = gd.apply_gradients(gd_compute_op)
 # step4:开始训练
 init = tf.global_variables_initializer()
 with tf.Session() as sess:
