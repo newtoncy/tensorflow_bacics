@@ -1,3 +1,4 @@
+# (i,j)棋子和同色棋子相连的最大长度
 def connect_len(chess_board, i, j):
     """
     相连的长度
@@ -31,6 +32,8 @@ def connect_len(chess_board, i, j):
     return max(result)
 
 
+# 残局评价函数,因为只有九个格子,所以评估函数只在胜利的情况返回正无穷,输掉的时候返回负无穷
+# 其他时候返回0
 def evaluation(chess_board):
     """
 
